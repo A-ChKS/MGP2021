@@ -15,15 +15,16 @@ public class GameSystem {
     // Singleton Pattern : Blocks others from creating
     private GameSystem()
     {
+
     }
 
     public void Update(float _deltaTime)
     {
+
     }
 
     public void Init(SurfaceView _view)
     {
-
         // We will add all of our states into the state manager here!
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new MainGameSceneState());
