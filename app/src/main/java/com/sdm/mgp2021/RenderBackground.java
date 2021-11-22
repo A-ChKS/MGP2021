@@ -56,6 +56,14 @@ public class RenderBackground implements EntityBase{
 
         _canvas.drawBitmap(scaledbmp, xPos, yPos, null);  // 1st image
         _canvas.drawBitmap(scaledbmp, xPos + ScreenWidth, yPos, null); // 2nd image
+
+        //Matrix transform = new Matrix();
+
+        //transform.postTranslate (x,y)
+        //transform.postScale (1,1)
+
+        //transform.postRotate((float) Math.toDegrees(30));
+        //_canvas.drawBitmap(ship, transform, null);
     }
 
     @Override

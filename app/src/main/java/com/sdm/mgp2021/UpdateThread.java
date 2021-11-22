@@ -17,6 +17,7 @@ public class UpdateThread extends Thread {
 
     private boolean isRunning = false;
 
+    // We will be adding more managers here!!!
     public UpdateThread(GameView _view)
     {
         view = _view;
@@ -57,6 +58,7 @@ public class UpdateThread extends Thread {
         // This is to calculate delta time (more precise)
         long prevTime = System.nanoTime();
 
+        // Need to edit to the start state that you have.
         StateManager.Instance.Start("MainGame");  // To edit to whichever state to start with.
 
         // This is the game loop
@@ -80,7 +82,7 @@ public class UpdateThread extends Thread {
                     // Fill the background color to reset
                     canvas.drawColor(Color.BLACK);
 
-                    StateManager.Instance.Render(canvas);
+                    StateManager.Instance.Render(canvas); // Render the things that u place on the state
                 }
                 holder.unlockCanvasAndPost(canvas);
             }
