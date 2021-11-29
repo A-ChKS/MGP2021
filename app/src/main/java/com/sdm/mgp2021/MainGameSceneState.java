@@ -20,6 +20,7 @@ public class MainGameSceneState implements StateBase {
     public void OnEnter(SurfaceView _view)
     {
         RenderBackground.Create(); //  Background is an entity
+        RenderTextEntity.Create();
         // Example to include another Renderview for Pause Button
     }
 

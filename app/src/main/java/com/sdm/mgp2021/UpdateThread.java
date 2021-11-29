@@ -25,12 +25,12 @@ public class UpdateThread extends Thread {
 
 		// Manage your managers if there is any
         StateManager.Instance.Init(_view); // State Manager
+        ResourceManager.Instance.Init(_view); // Resource Manager
         EntityManager.Instance.Init(_view); // Entity Manager
         GameSystem.Instance.Init(_view);  // GameSystem
 
         // Audio Manager
         // Touch Manager
-        // Resource Manager
     }
 
     public boolean IsRunning()
@@ -60,6 +60,7 @@ public class UpdateThread extends Thread {
 
         // Need to edit to the start state that you have.
         StateManager.Instance.Start("MainGame");  // To edit to whichever state to start with.
+        //StateManager.Instance.Start("Default");  // To edit to whichever state to start with.
 
         // This is the game loop
         while (isRunning && StateManager.Instance.GetCurrentState() != "INVALID")

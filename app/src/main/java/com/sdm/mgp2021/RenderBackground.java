@@ -10,6 +10,7 @@ public class RenderBackground implements EntityBase{
 
     private boolean isDone = false;
     private Bitmap bmp = null;
+    private Bitmap ship = null;
     private float xPos, yPos, offset;
     private SurfaceView view = null;
 
@@ -31,6 +32,8 @@ public class RenderBackground implements EntityBase{
     @Override
     public void Init(SurfaceView _view){
         bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamescene);
+        //ship = BitmapFactory.decodeResource(_view.getResources(),R.drawable.ship2_1);
+        ship = ResourceManager.Instance.GetBitMap(R.drawable.ship2_1);
 
         // Find the surfaceview size or the screen size.
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
