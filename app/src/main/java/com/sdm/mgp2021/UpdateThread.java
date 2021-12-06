@@ -1,7 +1,6 @@
 package com.sdm.mgp2021;
 
-// Created by TanSiewLan2021
-
+// Created by TanSiewLan2020
 // Need a delicated thread to run Surfaceview's update method
 
 import android.graphics.Canvas;
@@ -17,20 +16,16 @@ public class UpdateThread extends Thread {
 
     private boolean isRunning = false;
 
-    // We will be adding more managers here!!!
     public UpdateThread(GameView _view)
     {
         view = _view;
         holder = _view.getHolder();
 
-		// Manage your managers if there is any
-        StateManager.Instance.Init(_view); // State Manager
-        ResourceManager.Instance.Init(_view); // Resource Manager
-        EntityManager.Instance.Init(_view); // Entity Manager
-        GameSystem.Instance.Init(_view);  // GameSystem
-
-        // Audio Manager
-        // Touch Manager
+		  // Manage your managers if there is any
+        StateManager.Instance.Init(_view);
+        EntityManager.Instance.Init(_view);
+        GameSystem.Instance.Init(_view);
+        ResourceManager.Instance.Init(_view);
     }
 
     public boolean IsRunning()
@@ -58,9 +53,9 @@ public class UpdateThread extends Thread {
         // This is to calculate delta time (more precise)
         long prevTime = System.nanoTime();
 
-        // Need to edit to the start state that you have.
         StateManager.Instance.Start("MainGame");  // To edit to whichever state to start with.
-        //StateManager.Instance.Start("Default");  // To edit to whichever state to start with.
+
+        // Change Splashpage to be a state -->Then this field here will be "Splashstate"
 
         // This is the game loop
         while (isRunning && StateManager.Instance.GetCurrentState() != "INVALID")
@@ -83,7 +78,7 @@ public class UpdateThread extends Thread {
                     // Fill the background color to reset
                     canvas.drawColor(Color.BLACK);
 
-                    StateManager.Instance.Render(canvas); // Render the things that u place on the state
+                    StateManager.Instance.Render(canvas);
                 }
                 holder.unlockCanvasAndPost(canvas);
             }

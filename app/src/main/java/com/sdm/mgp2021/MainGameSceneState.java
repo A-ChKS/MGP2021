@@ -21,7 +21,9 @@ public class MainGameSceneState implements StateBase {
     {
         RenderBackground.Create(); //  Background is an entity
         RenderTextEntity.Create();
+        Ship.Create();
         // Example to include another Renderview for Pause Button
+        PausebuttonEntity.Create();
     }
 
     @Override

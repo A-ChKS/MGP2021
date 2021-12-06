@@ -21,14 +21,9 @@ public class StateManager {
     private SurfaceView view = null;
 
     // This is the protected constructor for singleton
-    private StateManager()
-    {
-    }
+    private StateManager() {}
 
-    public void Init(SurfaceView _view)
-    {
-        view = _view;
-    }
+    public void Init(SurfaceView _view) { view = _view; }
 
     void AddState(StateBase _newState)
     {
