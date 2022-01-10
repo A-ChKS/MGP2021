@@ -20,12 +20,14 @@ public class MainGameSceneState implements StateBase {
     public void OnEnter(SurfaceView _view)
     {
 
-        RenderTextEntity.Create();
 
         RenderBackground.Create();
-        Ship.Create();
+        //Ship.Create();
         NextEntity.Create();
-                   
+        RenderTextEntity.Create();
+
+        //SmurfEntity.Create(); //wk8<--Add Smurf
+        SmurfEntityDraggable.Create(); //wk8 <-add draggable smurf
 
         PauseButton.Create(); 
 
