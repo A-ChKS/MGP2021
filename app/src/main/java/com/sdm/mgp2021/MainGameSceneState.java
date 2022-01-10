@@ -1,16 +1,16 @@
 package com.sdm.mgp2021;
 
+// Tan Siew Lan
+
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceView;
 
-// Created by TanSiewLan2021
-
 public class MainGameSceneState implements StateBase {
     private float timer = 0.0f;
-
+ 
     @Override
     public String GetName() {
         return "MainGame";
@@ -19,17 +19,31 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
-        RenderBackground.Create(); //  Background is an entity
+
         RenderTextEntity.Create();
-        Ship.Create();
-        // Example to include another Renderview for Pause Button
-        PausebuttonEntity.Create();
+
+        RenderBackground.Create();
+        NextEntity.Create();
+                   
+
+        PauseButton.Create(); 
+
+        // Restart score here
+        GameSystem.Instance.ResetScore();
+
+        timer = 0.0f;
+
+        int currScore = 0;
+        GameSystem.Instance.SaveEditBegin();
+        GameSystem.Instance.SetIntInSave("Score", currScore);
+        GameSystem.Instance.SaveEditEnd();
     }
 
     @Override
     public void OnExit() {
         EntityManager.Instance.Clean();
         GamePage.Instance.finish();
+        EntityManager.Instance.Clean();
     }
 
     @Override
@@ -37,18 +51,37 @@ public class MainGameSceneState implements StateBase {
     {
         EntityManager.Instance.Render(_canvas);
 
+        String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(64);
+
+        _canvas.drawText(scoreText, 10, 220, paint);
+
     }
 
     @Override
     public void Update(float _dt) {
+        timer += _dt;
+
+//        if (timer > spawnTime)
+//        {
+//            //PlayerEntity.Create();  //Example: Sprite
+//            //NextEntity.Create();
+//            timer = 0.0f;
+//        }
+
+        if (GameSystem.Instance.GetIsPaused()){return;}
 
         EntityManager.Instance.Update(_dt);
 
         if (TouchManager.Instance.IsDown()) {
-			
-            //Example of touch on screen in the main game to trigger back to Main menu
-            StateManager.Instance.ChangeState("Mainmenu");
+
+                StateManager.Instance.ChangeState("Maingame");
         }
+        
+
     }
 }
 

@@ -1,7 +1,7 @@
 package com.sdm.mgp2021;
 
 // Created by TanSiewLan20201
-// Sample Entity 
+// Sample Entity
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
-public class StarEntity implements EntityBase, Collidable{
+public class NextEntity implements EntityBase, Collidable{
 
     private Bitmap bmp = null;
 
@@ -51,7 +51,7 @@ public class StarEntity implements EntityBase, Collidable{
         // Check out of screen
         if (xPos <= -bmp.getHeight() * 0.5f){
 
-        // Move it to another random pos again
+            // Move it to another random pos again
         }
     }
 
@@ -109,7 +109,7 @@ public class StarEntity implements EntityBase, Collidable{
         return bmp.getWidth();
     }
 
-   @Override
+    @Override
     public void OnHit(Collidable _other) {
         if(_other.GetType() != this.GetType()
                 && _other.GetType() !=  "SmurfEntity") {  // Another entity
