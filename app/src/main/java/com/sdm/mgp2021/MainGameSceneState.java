@@ -23,6 +23,7 @@ public class MainGameSceneState implements StateBase {
         RenderTextEntity.Create();
 
         RenderBackground.Create();
+        Ship.Create();
         NextEntity.Create();
                    
 

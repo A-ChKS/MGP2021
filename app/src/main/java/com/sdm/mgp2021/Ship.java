@@ -71,13 +71,13 @@ public class Ship implements EntityBase {
             SetIsDone(true);
         }
 
-//        if (TouchManager.Instance.IsDown()){
-//            float imgRadius = bmp.getHeight() * 0.5f;
-//            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius))
-//            {
-//                SetIsDone(true);
-//            }
-//        }
+        if (TouchManager.Instance.IsDown()){
+            float imgRadius = bmp.getHeight() * 0.5f;
+            if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius))
+            {
+                SetIsDone(true);
+            }
+        }
 
         if (TouchManager.Instance.HasTouch()) // Touch and drag
         {

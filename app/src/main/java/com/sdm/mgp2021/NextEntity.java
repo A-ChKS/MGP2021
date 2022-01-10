@@ -44,6 +44,8 @@ public class NextEntity implements EntityBase, Collidable{
 
     @Override
     public void Update(float _dt) {
+        if (GameSystem.Instance.GetIsPaused())
+            return;
 
         // Do nothing if it is not in the main game state
         if (StateManager.Instance.GetCurrentState() != "MainGame")

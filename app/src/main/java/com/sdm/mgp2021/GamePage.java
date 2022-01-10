@@ -20,6 +20,7 @@ public class GamePage extends Activity {
         //To make fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE); // Hide titlebar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  // Hide topbar
+//        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         Instance = this;
 

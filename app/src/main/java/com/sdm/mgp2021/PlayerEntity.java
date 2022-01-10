@@ -47,6 +47,9 @@ public class PlayerEntity implements EntityBase{
     @Override
     public void Update(float _dt) {
 
+        if (GameSystem.Instance.GetIsPaused())
+            return;
+
         // Do nothing if it is not main game state
         if (StateManager.Instance.GetCurrentState() == "Default")
         {

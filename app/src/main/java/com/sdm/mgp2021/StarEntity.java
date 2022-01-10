@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.view.SurfaceView;
-
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import java.util.Random;
 
 public class StarEntity implements EntityBase, Collidable{
@@ -17,12 +19,14 @@ public class StarEntity implements EntityBase, Collidable{
     private float xPos = 0;
     private float xStart = 0;
     private float yPos = 0;
-    private float screenHeight = 0;
+    private float screenWidth, screenHeight = 0;
     private float speed = 0;
     private boolean isDone = false;
     private boolean isInit = false;
 
-    int ScreenWidth, ScreenHeight;
+    private int triesCount = 10;
+
+    private Vibrator _vibrator;
 
     @Override
     public boolean IsDone() {
@@ -40,10 +44,30 @@ public class StarEntity implements EntityBase, Collidable{
         // New method using our own resource manager : Returns pre-loaded one if exists
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.star);
         isInit = true;
+
+        _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
+    }
+
+    public void startVibrte() {
+        if (Build.VERSION.SDK_INT >= 26)
+        {
+            _vibrator.vibrate(VibrationEffect.createOneShot(150,10));
+        }
+        else {
+            long pattern[] = {0, 50, 0};
+            _vibrator.vibrate(pattern, -1);
+        }
+    }
+
+    public void stopVibrate() {
+        _vibrator.cancel();
     }
 
     @Override
     public void Update(float _dt) {
+
+        if (GameSystem.Instance.GetIsPaused())
+            return;
 
         // Do nothing if it is not in the main game state
         if (StateManager.Instance.GetCurrentState() != "MainGame")
@@ -113,6 +137,11 @@ public class StarEntity implements EntityBase, Collidable{
     public void OnHit(Collidable _other) {
         if(_other.GetType() != this.GetType()
                 && _other.GetType() !=  "SmurfEntity") {  // Another entity
+
+//            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
+//            startVibrate();
+//            log.v(TAG, "hit");
+
             SetIsDone(true);
         }
     }
