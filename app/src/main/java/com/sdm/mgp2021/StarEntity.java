@@ -50,7 +50,6 @@ public class StarEntity implements EntityBase, Collidable{
         screenHeight = _view.getHeight();
         xPos = screenWidth;
         yPos = ranGen.nextFloat() * screenHeight;
-
         _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
     }
 
@@ -75,8 +74,7 @@ public class StarEntity implements EntityBase, Collidable{
         if (GameSystem.Instance.GetIsPaused()) return;
 
         // Do nothing if it is not in the main game state
-        if (StateManager.Instance.GetCurrentState() != "MainGame")
-            return;
+        if (StateManager.Instance.GetCurrentState() != "MainGame") return;
 
         if (xPos >= -bmp.getHeight() * 0.5f){
             xPos -= cspeed * _dt;
