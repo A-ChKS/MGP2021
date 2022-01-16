@@ -23,7 +23,8 @@ public class MainGameSceneState implements StateBase {
 
         RenderBackground.Create();
         //Ship.Create();
-        NextEntity.Create();
+        //NextEntity.Create();
+        StarEntity.Create();
         RenderTextEntity.Create();
 
         //SmurfEntity.Create(); //wk8<--Add Smurf

@@ -31,7 +31,7 @@ public class RenderBackground implements EntityBase{
 
     @Override
     public void Init(SurfaceView _view){
-        bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamescene);
+        bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamebg);
         //ship = BitmapFactory.decodeResource(_view.getResources(),R.drawable.ship2_1);
         ship = ResourceManager.Instance.GetBitmap(R.drawable.ship2_1);
 

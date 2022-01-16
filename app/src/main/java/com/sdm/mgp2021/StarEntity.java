@@ -23,6 +23,7 @@ public class StarEntity implements EntityBase, Collidable{
     private float speed = 0;
     private boolean isDone = false;
     private boolean isInit = false;
+    private int cspeed = 250;
 
     private int triesCount = 10;
 
@@ -40,10 +41,15 @@ public class StarEntity implements EntityBase, Collidable{
 
     @Override
     public void Init(SurfaceView _view) {
-
         // New method using our own resource manager : Returns pre-loaded one if exists
-        bmp = ResourceManager.Instance.GetBitmap(R.drawable.star);
+        bmp = ResourceManager.Instance.GetBitmap(R.drawable.candy);
         isInit = true;
+
+        Random ranGen = new Random();
+        screenWidth = _view.getWidth();
+        screenHeight = _view.getHeight();
+        xPos = screenWidth;
+        yPos = ranGen.nextFloat() * screenHeight;
 
         _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
     }
@@ -66,16 +72,23 @@ public class StarEntity implements EntityBase, Collidable{
     @Override
     public void Update(float _dt) {
 
-        if (GameSystem.Instance.GetIsPaused())
-            return;
+        if (GameSystem.Instance.GetIsPaused()) return;
 
         // Do nothing if it is not in the main game state
         if (StateManager.Instance.GetCurrentState() != "MainGame")
             return;
-        // Check out of screen
-        if (xPos <= -bmp.getHeight() * 0.5f){
 
-        // Move it to another random pos again
+        if (xPos >= -bmp.getHeight() * 0.5f){
+            xPos -= cspeed * _dt;
+        }
+
+        // Check out of screen
+        else if (xPos <= -bmp.getHeight() * 0.5f){
+
+            // Move it to another random pos again
+            Random ranGen = new Random();
+            xPos = screenWidth;
+            yPos = ranGen.nextFloat() * screenHeight;
         }
     }
 

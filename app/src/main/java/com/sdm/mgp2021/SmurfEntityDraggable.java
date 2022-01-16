@@ -26,7 +26,7 @@ public class SmurfEntityDraggable implements EntityBase {
     @Override
     public void Init(SurfaceView _view) {
         //week 8 => create new sprite instance
-        spritesmurf = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.smurf_sprite),4,4, 8 );
+        spritesmurf = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.playerp),4,4, 8 );
         //week 8=>randomise position
         xPos = ranGen.nextFloat() * _view.getWidth()/2;
         yPos = ranGen.nextFloat() * _view.getHeight()/2;
@@ -36,6 +36,8 @@ public class SmurfEntityDraggable implements EntityBase {
     public void Update(float _dt) {
         // wk8=> update sprite animation frame based on timing
         spritesmurf.Update(_dt);
+
+        if (GameSystem.Instance.GetIsPaused()) return;
 
         //wk8=>Dragging code --
         if (TouchManager.Instance.HasTouch())  // Touch and drag
