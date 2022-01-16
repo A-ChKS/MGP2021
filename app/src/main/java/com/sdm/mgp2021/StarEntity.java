@@ -50,6 +50,7 @@ public class StarEntity implements EntityBase, Collidable{
         screenHeight = _view.getHeight();
         xPos = screenWidth;
         yPos = ranGen.nextFloat() * screenHeight;
+
         _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
     }
 
