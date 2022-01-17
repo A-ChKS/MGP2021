@@ -10,7 +10,8 @@ import android.view.SurfaceView;
 
 public class MainGameSceneState implements StateBase {
     private float timer = 0.0f;
- 
+    private int currScore = 0;
+
     @Override
     public String GetName() {
         return "MainGame";
@@ -19,8 +20,6 @@ public class MainGameSceneState implements StateBase {
     @Override
     public void OnEnter(SurfaceView _view)
     {
-
-
         RenderBackground.Create();
 //        Ship.Create();
 //        NextEntity.Create();
@@ -38,7 +37,6 @@ public class MainGameSceneState implements StateBase {
 
         timer = 0.0f;
 
-        int currScore = 0;
         GameSystem.Instance.SaveEditBegin();
         GameSystem.Instance.SetIntInSave("Score", currScore);
         GameSystem.Instance.SaveEditEnd();
