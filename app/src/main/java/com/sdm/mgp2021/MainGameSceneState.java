@@ -22,13 +22,14 @@ public class MainGameSceneState implements StateBase {
 
 
         RenderBackground.Create();
-        //Ship.Create();
-        //NextEntity.Create();
+//        Ship.Create();
+//        NextEntity.Create();
+        SmurfEntityDraggable.Create(); //wk8 <-add draggable smurf
+        StarEntity.Create();
         StarEntity.Create();
         RenderTextEntity.Create();
 
         //SmurfEntity.Create(); //wk8<--Add Smurf
-        SmurfEntityDraggable.Create(); //wk8 <-add draggable smurf
 
         PauseButton.Create(); 
 
@@ -62,7 +63,6 @@ public class MainGameSceneState implements StateBase {
         paint.setTextSize(64);
 
         _canvas.drawText(scoreText, 10, 220, paint);
-
     }
 
     @Override
@@ -81,7 +81,6 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (TouchManager.Instance.IsDown()) {
-
                 StateManager.Instance.ChangeState("Maingame");
         }
         

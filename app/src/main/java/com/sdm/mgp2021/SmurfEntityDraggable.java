@@ -74,9 +74,7 @@ public class SmurfEntityDraggable implements EntityBase {
     public void SetRenderLayer(int _newLayer) { }
 
     @Override
-    public ENTITY_TYPE GetEntityType() {
-        return ENTITY_TYPE.ENT_SMURF;
-    } //Week 8=>Update ent type
+    public ENTITY_TYPE GetEntityType() { return ENTITY_TYPE.ENT_SMURF; } //Week 8=>Update ent type
 
     public static SmurfEntityDraggable Create() {
         SmurfEntityDraggable result = new SmurfEntityDraggable(); //wek 8

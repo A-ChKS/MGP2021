@@ -94,7 +94,7 @@ public class Ship implements EntityBase {
 
     @Override
     public void Render(Canvas _canvas){
-        spritesmurf .Render(_canvas, 100, 100);
+        spritesmurf.Render(_canvas, 100, 100);
 
         _canvas.drawBitmap(bmp, xPos, yPos, null);
 

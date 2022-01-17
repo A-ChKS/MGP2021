@@ -23,11 +23,15 @@ public class StarEntity implements EntityBase, Collidable{
     private float speed = 0;
     private boolean isDone = false;
     private boolean isInit = false;
-    private int cspeed = 250;
+    private float cspeed = 250;
 
     private int triesCount = 10;
+    private boolean hasTouched = false;
 
     private Vibrator _vibrator;
+    Random ranGen = new Random();
+
+    private int currScore = 0;
 
     @Override
     public boolean IsDone() {
@@ -45,7 +49,6 @@ public class StarEntity implements EntityBase, Collidable{
         bmp = ResourceManager.Instance.GetBitmap(R.drawable.candy);
         isInit = true;
 
-        Random ranGen = new Random();
         screenWidth = _view.getWidth();
         screenHeight = _view.getHeight();
         xPos = screenWidth;
@@ -71,6 +74,7 @@ public class StarEntity implements EntityBase, Collidable{
     @Override
     public void Update(float _dt) {
 
+
         if (GameSystem.Instance.GetIsPaused()) return;
 
         // Do nothing if it is not in the main game state
@@ -84,9 +88,20 @@ public class StarEntity implements EntityBase, Collidable{
         else if (xPos <= -bmp.getHeight() * 0.5f){
 
             // Move it to another random pos again
-            Random ranGen = new Random();
             xPos = screenWidth;
             yPos = ranGen.nextFloat() * screenHeight;
+        }
+
+        float imgRadius1 = bmp.getWidth() * 0.5f;
+        //Log.v("imgrad","s"+imgRadius1);
+        if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius1) )
+        {
+            xPos = screenWidth;
+            yPos = ranGen.nextFloat() * screenHeight;
+            currScore += 10;
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", currScore);
+            GameSystem.Instance.SaveEditEnd();
         }
     }
 
@@ -146,12 +161,14 @@ public class StarEntity implements EntityBase, Collidable{
 
    @Override
     public void OnHit(Collidable _other) {
-        if(_other.GetType() != this.GetType()
-                && _other.GetType() !=  "SmurfEntity") {  // Another entity
+        if(_other.GetType() != this.GetType() && _other.GetType() !=  "SmurfEntity") {  // Another entity
 
 //            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
 //            startVibrate();
 //            log.v(TAG, "hit");
+
+            xPos = screenWidth;
+            yPos = ranGen.nextFloat() * screenHeight;
 
             SetIsDone(true);
         }
