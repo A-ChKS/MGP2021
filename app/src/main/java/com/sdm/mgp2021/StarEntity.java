@@ -91,18 +91,6 @@ public class StarEntity implements EntityBase, Collidable{
             xPos = screenWidth;
             yPos = ranGen.nextFloat() * screenHeight;
         }
-
-        float imgRadius1 = bmp.getWidth() * 0.5f;
-        //Log.v("imgrad","s"+imgRadius1);
-        if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius1) )
-        {
-            xPos = screenWidth;
-            yPos = ranGen.nextFloat() * screenHeight;
-            currScore += 10;
-            GameSystem.Instance.SaveEditBegin();
-            GameSystem.Instance.SetIntInSave("Score", currScore);
-            GameSystem.Instance.SaveEditEnd();
-        }
     }
 
     @Override
@@ -150,18 +138,16 @@ public class StarEntity implements EntityBase, Collidable{
     }
 
     @Override
-    public float GetPosY() {
-        return yPos;
-    }
+    public float GetPosY() { return yPos; }
 
     @Override
     public float GetRadius() {
-        return bmp.getWidth();
+        return bmp.getWidth()/4;
     }
 
    @Override
     public void OnHit(Collidable _other) {
-        if(_other.GetType() != this.GetType() && _other.GetType() !=  "SmurfEntity") {  // Another entity
+        if(_other.GetType() != this.GetType() && _other.GetType() ==  "SmurfEntityDraggable") {  // Another entity
 
 //            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
 //            startVibrate();
@@ -169,8 +155,12 @@ public class StarEntity implements EntityBase, Collidable{
 
             xPos = screenWidth;
             yPos = ranGen.nextFloat() * screenHeight;
+            currScore += 10;
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", currScore);
+            GameSystem.Instance.SaveEditEnd();
 
-            SetIsDone(true);
+//            SetIsDone(true);
         }
     }
 }

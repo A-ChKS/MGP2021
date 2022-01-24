@@ -6,7 +6,7 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
-public class SmurfEntityDraggable implements EntityBase {
+public class SmurfEntityDraggable implements EntityBase, Collidable {
     private boolean isDone = false;
     private float xPos, yPos, offset;
     private Sprite spritesmurf = null;   // New on Week 8
@@ -80,5 +80,32 @@ public class SmurfEntityDraggable implements EntityBase {
         SmurfEntityDraggable result = new SmurfEntityDraggable(); //wek 8
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_SMURF); //wk8=>update ent tyep
         return result;
+    }
+    @Override
+    public String GetType() {
+        return "SmurfEntityDraggable";
+    }
+
+    @Override
+    public float GetPosX() {
+        return xPos;
+    }
+
+    @Override
+    public float GetPosY() { return yPos; }
+
+    @Override
+    public float GetRadius() { return spritesmurf.GetWidth()/4; }
+
+    @Override
+    public void OnHit(Collidable _other) {
+        if(_other.GetType() != this.GetType() && _other.GetType() !=  "StarEntity") {  // Another entity
+
+//            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
+//            startVibrate();
+//            log.v(TAG, "hit");
+
+            SetIsDone(true);
+        }
     }
 }
