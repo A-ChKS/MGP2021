@@ -34,7 +34,7 @@ public class RenderBackground implements EntityBase{
         bmp = BitmapFactory.decodeResource(_view.getResources(),R.drawable.gamebg);
         //ship = BitmapFactory.decodeResource(_view.getResources(),R.drawable.ship2_1);
         ship = ResourceManager.Instance.GetBitmap(R.drawable.ship2_1);
-
+        ship = ResourceManager.Instance.GetBitmap(R.drawable.ship2_1);
         // Find the surfaceview size or the screen size.
         DisplayMetrics metrics = _view.getResources().getDisplayMetrics();
         ScreenWidth = metrics.widthPixels;
