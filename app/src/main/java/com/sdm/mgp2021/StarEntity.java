@@ -31,7 +31,7 @@ public class StarEntity implements EntityBase, Collidable{
     private Vibrator _vibrator;
     Random ranGen = new Random();
 
-    private int currScore = 0;
+    int currScore = 0;
 
     @Override
     public boolean IsDone() {
@@ -153,12 +153,13 @@ public class StarEntity implements EntityBase, Collidable{
 //            startVibrate();
 //            log.v(TAG, "hit");
 
+            GameSystem.Instance.AddScore(10);
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
+            GameSystem.Instance.SaveEditEnd();
+
             xPos = screenWidth;
             yPos = ranGen.nextFloat() * screenHeight;
-            currScore += 10;
-            GameSystem.Instance.SaveEditBegin();
-            GameSystem.Instance.SetIntInSave("Score", currScore);
-            GameSystem.Instance.SaveEditEnd();
 
 //            SetIsDone(true);
         }

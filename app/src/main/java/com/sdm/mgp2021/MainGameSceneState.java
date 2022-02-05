@@ -81,7 +81,6 @@ public class MainGameSceneState implements StateBase {
         if (TouchManager.Instance.IsDown()) {
                 StateManager.Instance.ChangeState("Maingame");
         }
-        
 
     }
 }
