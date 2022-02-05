@@ -3,6 +3,7 @@ package com.sdm.mgp2021;
 // Tan Siew Lan
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,7 +25,6 @@ public class MainGameSceneState implements StateBase {
 //        Ship.Create();
 //        NextEntity.Create();
         SmurfEntityDraggable.Create(); //wk8 <-add draggable smurf
-        StarEntity.Create();
         StarEntity.Create();
         RenderTextEntity.Create();
 
@@ -74,12 +74,23 @@ public class MainGameSceneState implements StateBase {
 //            timer = 0.0f;
 //        }
 
+        if (timer > 1.5)
+        {
+            StarEntity.Create();
+            timer = 0.0f;
+        }
+
         if (GameSystem.Instance.GetIsPaused()){return;}
 
         EntityManager.Instance.Update(_dt);
 
         if (TouchManager.Instance.IsDown()) {
-                StateManager.Instance.ChangeState("Maingame");
+            StateManager.Instance.ChangeState("Maingame");
+        }
+
+
+        if (GameSystem.Instance.GetScore() == 50) {
+            StateManager.Instance.ChangeState("Gameover");
         }
 
     }

@@ -92,7 +92,7 @@ public class Gameover extends Activity implements OnClickListener, StateBase {
     }
 
     @Override
-    public String GetName() { return "Mainmenu"; }
+    public String GetName() { return "Gameover"; }
 
     @Override
     protected void onPause(){

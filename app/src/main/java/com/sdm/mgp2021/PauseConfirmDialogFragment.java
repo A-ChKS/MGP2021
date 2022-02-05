@@ -18,17 +18,17 @@ public class PauseConfirmDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Confirm Pause?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User triggered pause
                         GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
                         IsShown = false;
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the pause
-                        GameSystem.Instance.SetIsPaused(!GameSystem.Instance.GetIsPaused());
+                        StateManager.Instance.ChangeState("Mainmenu");
                         IsShown = false;
                     }
                 });

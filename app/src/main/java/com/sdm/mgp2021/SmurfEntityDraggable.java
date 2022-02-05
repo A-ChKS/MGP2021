@@ -51,7 +51,6 @@ public class SmurfEntityDraggable implements EntityBase, Collidable {
                 yPos = TouchManager.Instance.GetPosY();
             }
         }
-        //Wk8=>End Dragging Code
     }
 
     @Override

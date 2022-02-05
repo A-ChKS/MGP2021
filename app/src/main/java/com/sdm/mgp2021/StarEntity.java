@@ -87,9 +87,10 @@ public class StarEntity implements EntityBase, Collidable{
         // Check out of screen
         else if (xPos <= -bmp.getHeight() * 0.5f){
 
+            SetIsDone(true);
             // Move it to another random pos again
-            xPos = screenWidth;
-            yPos = ranGen.nextFloat() * screenHeight;
+//            xPos = screenWidth;
+//            yPos = ranGen.nextFloat() * screenHeight;
         }
     }
 
@@ -158,10 +159,10 @@ public class StarEntity implements EntityBase, Collidable{
             GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
             GameSystem.Instance.SaveEditEnd();
 
-            xPos = screenWidth;
-            yPos = ranGen.nextFloat() * screenHeight;
+//            xPos = screenWidth;
+//            yPos = ranGen.nextFloat() * screenHeight;
 
-//            SetIsDone(true);
+            SetIsDone(true);
         }
     }
 }
