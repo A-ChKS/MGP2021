@@ -44,7 +44,7 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.SetIntInSave("Score", currScore);
         GameSystem.Instance.SaveEditEnd();
 
-        lifetime = 30.f;
+        lifetime = 30.f; // 30.f
     }
 
     @Override
