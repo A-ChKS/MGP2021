@@ -15,6 +15,7 @@ public class MainGameSceneState implements StateBase {
     private float speed = 1.f;
     private int ss = 50;
     private float lifetime;
+    private int combo = 0;
 
     @Override
     public String GetName() {
@@ -61,6 +62,7 @@ public class MainGameSceneState implements StateBase {
 
         String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
         String timeText = String.format("TIME : %f", lifetime);
+        String comboText = String.format("COMBO : %d", GameSystem.Instance.GetCombo());
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -68,6 +70,7 @@ public class MainGameSceneState implements StateBase {
 
         _canvas.drawText(scoreText, 10, 220, paint);
         _canvas.drawText(timeText, 750, 80, paint);
+        _canvas.drawText(comboText, 750, 220, paint);
     }
 
     @Override
@@ -110,6 +113,10 @@ public class MainGameSceneState implements StateBase {
         }
 
         lifetime -= _dt;
+
+        if (GameSystem.Instance.GetCombo() > 3)  {
+            lifetime ++;
+        }
         if (lifetime < 0.0f) {
             StateManager.Instance.ChangeState("Mainmenu");
         }

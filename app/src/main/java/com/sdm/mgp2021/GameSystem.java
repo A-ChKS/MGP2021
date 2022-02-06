@@ -2,9 +2,9 @@ package com.sdm.mgp2021;
 
 // Tan Siew Lan
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.SurfaceView;
+
 
 public class GameSystem {
     public final static GameSystem Instance = new GameSystem();
@@ -19,6 +19,9 @@ public class GameSystem {
     private int currScore = 0;
     SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor = null;
+
+    // for combos
+    public int currCombo = 0;
 
     // Better to place in a getter/setter.
     public PlayerEntity playerEntityInstance = null;
@@ -38,6 +41,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new IntroState());
+        StateManager.Instance.AddState(new Gameover());
         StateManager.Instance.AddState(new ResultScreenState());
 
 
@@ -59,6 +63,12 @@ public class GameSystem {
     public int GetScore(){
         return currScore;
     }
+
+    public int GetCombo() { return currCombo;}
+
+    public void AddCombo() { currCombo++;}
+
+    public void ResetCombo() { currCombo = 0;}
 
     public void AddScore(){
         AddScore(1);

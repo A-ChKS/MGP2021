@@ -1,7 +1,7 @@
 package com.sdm.mgp2021;
 
 // Created by TanSiewLan20201
-// Sample Entity 
+// Sample Entity
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,7 +15,6 @@ import java.util.Random;
 public class StarEntity implements EntityBase, Collidable{
 
     private Bitmap bmp = null;
-
     private float xPos = 0;
     private float xStart = 0;
     private float yPos = 0;
@@ -108,11 +107,12 @@ public class StarEntity implements EntityBase, Collidable{
 
         // Check out of screen
         else if (xPos <= -bmp.getHeight() * 0.5f){
-
+            GameSystem.Instance.ResetCombo();
             SetIsDone(true);
             // Move it to another random pos again
 //            xPos = screenWidth;
 //            yPos = ranGen.nextFloat() * screenHeight;
+
         }
     }
 
@@ -168,7 +168,7 @@ public class StarEntity implements EntityBase, Collidable{
         return bmp.getWidth()/4;
     }
 
-   @Override
+    @Override
     public void OnHit(Collidable _other) {
         if(_other.GetType() != this.GetType() && _other.GetType() ==  "SmurfEntityDraggable") {  // Another entity
 
@@ -177,6 +177,7 @@ public class StarEntity implements EntityBase, Collidable{
 //            log.v(TAG, "hit");
 
             GameSystem.Instance.AddScore(10);
+            GameSystem.Instance.AddCombo();
             GameSystem.Instance.SaveEditBegin();
             GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
             GameSystem.Instance.SaveEditEnd();
