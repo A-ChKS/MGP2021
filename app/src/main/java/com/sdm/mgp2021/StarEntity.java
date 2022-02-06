@@ -24,6 +24,7 @@ public class StarEntity implements EntityBase, Collidable{
     private boolean isDone = false;
     private boolean isInit = false;
     private float cspeed = 250;
+    private float ss = 1.f;
 
     private int triesCount = 10;
     private boolean hasTouched = false;
@@ -80,8 +81,29 @@ public class StarEntity implements EntityBase, Collidable{
         // Do nothing if it is not in the main game state
         if (StateManager.Instance.GetCurrentState() != "MainGame") return;
 
+        if (GameSystem.Instance.GetScore() >= 50 && GameSystem.Instance.GetScore() < 100)
+        {
+            ss = 1.5f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 100 && GameSystem.Instance.GetScore() < 150)
+        {
+            ss = 2.f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 150 && GameSystem.Instance.GetScore() < 200)
+        {
+            ss = 2.5f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 200 && GameSystem.Instance.GetScore() < 250)
+        {
+            ss = 3.f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 250)
+        {
+            ss = 3.5f;
+        }
+
         if (xPos >= -bmp.getHeight() * 0.5f){
-            xPos -= cspeed * _dt;
+            xPos -= cspeed * ss * _dt;
         }
 
         // Check out of screen
@@ -158,9 +180,6 @@ public class StarEntity implements EntityBase, Collidable{
             GameSystem.Instance.SaveEditBegin();
             GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
             GameSystem.Instance.SaveEditEnd();
-
-//            xPos = screenWidth;
-//            yPos = ranGen.nextFloat() * screenHeight;
 
             SetIsDone(true);
         }

@@ -12,6 +12,9 @@ import android.view.SurfaceView;
 public class MainGameSceneState implements StateBase {
     private float timer = 0.0f;
     private int currScore = 0;
+    private float speed = 1.f;
+    private int ss = 50;
+    private float lifetime;
 
     @Override
     public String GetName() {
@@ -40,6 +43,8 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.SaveEditBegin();
         GameSystem.Instance.SetIntInSave("Score", currScore);
         GameSystem.Instance.SaveEditEnd();
+
+        lifetime = 30.f;
     }
 
     @Override
@@ -55,26 +60,42 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Render(_canvas);
 
         String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+        String timeText = String.format("TIME : %f", lifetime);
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(64);
 
         _canvas.drawText(scoreText, 10, 220, paint);
+        _canvas.drawText(timeText, 750, 80, paint);
     }
 
     @Override
     public void Update(float _dt) {
         timer += _dt;
 
-//        if (timer > spawnTime)
-//        {
-//            //PlayerEntity.Create();  //Example: Sprite
-//            //NextEntity.Create();
-//            timer = 0.0f;
-//        }
+        if (GameSystem.Instance.GetScore() >= 50 && GameSystem.Instance.GetScore() < 100)
+        {
+            speed = 0.85f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 100 && GameSystem.Instance.GetScore() < 150)
+        {
+            speed = 0.70f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 150 && GameSystem.Instance.GetScore() < 200)
+        {
+            speed = 0.55f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 200 && GameSystem.Instance.GetScore() < 250)
+        {
+            speed = 0.40f;
+        }
+        else if (GameSystem.Instance.GetScore() >= 250)
+        {
+            speed = 0.25f;
+        }
 
-        if (timer > 1.5)
+        if (timer > 1.5 * speed)
         {
             StarEntity.Create();
             timer = 0.0f;
@@ -88,11 +109,10 @@ public class MainGameSceneState implements StateBase {
             StateManager.Instance.ChangeState("Maingame");
         }
 
-
-        if (GameSystem.Instance.GetScore() == 50) {
-            StateManager.Instance.ChangeState("Gameover");
+        lifetime -= _dt;
+        if (lifetime < 0.0f) {
+            StateManager.Instance.ChangeState("Mainmenu");
         }
-
     }
 }
 
