@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-
+//scoreboard need to be added
 public class Gameover extends Activity implements OnClickListener, StateBase {
 
     private Button btn_start;
