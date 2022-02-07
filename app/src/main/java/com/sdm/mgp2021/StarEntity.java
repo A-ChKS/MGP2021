@@ -29,9 +29,11 @@ public class StarEntity implements EntityBase, Collidable{
     private boolean hasTouched = false;
 
     private Vibrator _vibrator;
-    Random ranGen = new Random();
 
     int currScore = 0;
+    Random ranGen = new Random();
+
+    private int notUI = 300;
 
     @Override
     public boolean IsDone() {
@@ -52,7 +54,7 @@ public class StarEntity implements EntityBase, Collidable{
         screenWidth = _view.getWidth();
         screenHeight = _view.getHeight();
         xPos = screenWidth;
-        yPos = ranGen.nextFloat() * screenHeight;
+        yPos = ranGen.nextFloat() * (screenHeight - notUI) + notUI;
         _vibrator = (Vibrator)_view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
     }
 
