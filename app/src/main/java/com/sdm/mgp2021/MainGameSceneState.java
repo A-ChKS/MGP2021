@@ -46,6 +46,7 @@ public class MainGameSceneState implements StateBase {
         GameSystem.Instance.SaveEditEnd();
 
         lifetime = 30.f; // 30.f
+        combo = 0;
     }
 
     @Override
@@ -68,9 +69,9 @@ public class MainGameSceneState implements StateBase {
         paint.setColor(Color.BLACK);
         paint.setTextSize(64);
 
-        _canvas.drawText(scoreText, 10, 220, paint);
+        _canvas.drawText(scoreText, 30, 160, paint);
         _canvas.drawText(timeText, 750, 80, paint);
-        _canvas.drawText(comboText, 750, 220, paint);
+        _canvas.drawText(comboText, 750, 160, paint);
     }
 
     @Override
