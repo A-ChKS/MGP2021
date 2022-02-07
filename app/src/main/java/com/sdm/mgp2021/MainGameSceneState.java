@@ -77,6 +77,8 @@ public class MainGameSceneState implements StateBase {
     public void Update(float _dt) {
         timer += _dt;
 
+        if (GameSystem.Instance.GetIsPaused()){return;}
+
         if (GameSystem.Instance.GetScore() >= 50 && GameSystem.Instance.GetScore() < 100)
         {
             speed = 0.85f;
@@ -104,8 +106,6 @@ public class MainGameSceneState implements StateBase {
             timer = 0.0f;
         }
 
-        if (GameSystem.Instance.GetIsPaused()){return;}
-
         EntityManager.Instance.Update(_dt);
 
         if (TouchManager.Instance.IsDown()) {
@@ -115,10 +115,10 @@ public class MainGameSceneState implements StateBase {
         lifetime -= _dt;
 
         if (GameSystem.Instance.GetCombo() > 3)  {
-            lifetime ++;
+            lifetime += 2 * _dt;
         }
         if (lifetime < 0.0f) {
-            StateManager.Instance.ChangeState("Mainmenu");
+            StateManager.Instance.ChangeState("Gameover");
         }
     }
 }

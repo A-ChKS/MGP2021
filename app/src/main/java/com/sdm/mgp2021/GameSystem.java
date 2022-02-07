@@ -41,8 +41,8 @@ public class GameSystem {
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new IntroState());
-        StateManager.Instance.AddState(new Gameover());
         StateManager.Instance.AddState(new ResultScreenState());
+        StateManager.Instance.AddState(new Gameover());
 
 
         // Get our shared preferences (Save file)
